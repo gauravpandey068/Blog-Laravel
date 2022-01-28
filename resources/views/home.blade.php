@@ -1,23 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md">
+                <div class="row">
+                    @if($posts->count())
+                        @foreach($posts as $post)
+                            <div class="card m-2" style="width: 18rem;">
+                                <a href="{{route('post.show', $post->id)}}" class="text-decoration-none text-black">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg" class="card-img-top" alt="{{$post->title}}">
+                                <div class="card-body">
+                                    <h5 class="card-title text-black fw-bold">{{$post->title}}</h5>
+                                    <p class="card-text">Author: {{$post->user->name}}</p>
+                                </div>
+                                <div class="card-footer bg-white border-white">
+                                    <small class="text-muted">Created at {{$post->created_at->diffForHumans() }}</small>
+                                </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="card-body m-5">
+                            <p class="text-center text-primary fs-2">No Posts Found!</p>
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
