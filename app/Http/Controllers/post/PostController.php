@@ -53,7 +53,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         //authorize
-        if(!Gate::allows('authorization', $post)){
+        if(!Gate::allows('authorizationPost', $post)){
             abort(403, 'Unauthorized action');
         }
 
@@ -64,7 +64,7 @@ class PostController extends Controller
         //find the post
         $post = Post::find($id);
         //authorize
-        if(!Gate::allows('authorization', $post)){
+        if(!Gate::allows('authorizationPost', $post)){
             abort(403, 'Unauthorized action');
         }
         //validate the data
@@ -85,7 +85,7 @@ class PostController extends Controller
         //find the post
         $post = Post::find($id);
         //authorize
-        if(!Gate::allows('authorization', $post)){
+        if(!Gate::allows('authorizationPost', $post)){
             abort(403, 'Unauthorized action');
         }
         //delete the post

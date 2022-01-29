@@ -28,10 +28,33 @@
                 <img src="/storage/{{$post->image}}"
                      class="card-img-top" alt="{{$post->title}}">
                 <div class="card-body">
-                                        <p class="card-text mt-3">{!! nl2br(e($post->description)) !!}</p>
+                    <p class="card-text mt-3">{!! nl2br(e($post->description)) !!}</p>
 
                 </div>
+                @auth
+                    <div class="card-footer bg-white mt-3 mb-3 d-flex">
+                        <span
+                            class="fw-bold fs-4 text-primary me-3">{{$post->likes->count() }}</span>
+                        @if(!$post->likedBy(auth()->user()))
+                            <form action="{{route('post.like',$post->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-success">Like</button>
+                            </form>
+                        @else
+                            <form action="{{route('post.unlike',$post->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger">Unlike</button>
+                            </form>
+                        @endif
+                    </div>
+                @endauth
+                @guest
+                    <div class="card-footer bg-white mt-3 mb-3 d-flex">
+                        <span
+                            class="fs-4 text-primary fw-bold me-2">{{$post->likes->count() }}</span>
+                        <a href="#" class="ms-2 btn btn-outline-info disabled" tabindex="-1" role="button" aria-disabled="true">Like</a>
+                    </div>
+                @endguest
             </div>
         </div>
-    </div>
 @endsection
