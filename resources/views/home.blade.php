@@ -9,7 +9,7 @@
                         @foreach($posts as $post)
                             <div class="card m-2" style="width: 18rem;">
                                 <a href="{{route('post.show', $post->id)}}" class="text-decoration-none text-black">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg" class="card-img-top" alt="{{$post->title}}">
+                                <img src="/storage/{{$post->image}}" class="card-img-top mt-1" height="150" width="150" alt="{{$post->title}}">
                                 <div class="card-body">
                                     <h5 class="card-title text-black fw-bold">{{$post->title}}</h5>
                                     <p class="card-text">Author: {{$post->user->name}}</p>

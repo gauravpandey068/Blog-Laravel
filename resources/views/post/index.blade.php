@@ -21,22 +21,26 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{route('post')}}" method="post">
+                        <form action="{{route('post')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Title</label>
                                 <input type="text" class="form-control"
-                                       placeholder="Title" name="title" value="{{old('title')}}">
+                                       placeholder="Title" name="title" required value="{{old('title')}}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Image</label>
+                                <input type="file" class="form-control" required name="image">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Body</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Body"
-                                          rows="10" name="description">{{old('description')}}</textarea>
+                                          rows="10" name="description" required>{{old('description')}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Category</label>
                                 <input type="text" class="form-control"
-                                       placeholder="Category" name="category" value="{{old('category')}}">
+                                       placeholder="Category" name="category" value="{{old('category')}}" required>
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Post</button>
