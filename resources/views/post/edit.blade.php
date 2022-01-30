@@ -21,13 +21,21 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{route('post.update', $post->id)}}" method="post">
+                        <form action="{{route('post.update', $post->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="mb-3">
                                 <label class="form-label">Title</label>
                                 <input type="text" class="form-control"
                                        placeholder="Title" name="title" value="{{$post->title}}">
+                            </div>
+                            <div class="mb-3">
+                                Image
+                                <img src="/storage/{{$post->image}}" width="100%" height="100%" alt="{{$post->title}}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Image</label>
+                                <input type="file" class="form-control" value="/storage/{{$post->image}}" name="image">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Body</label>

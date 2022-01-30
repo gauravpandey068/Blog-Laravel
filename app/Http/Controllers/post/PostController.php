@@ -31,8 +31,6 @@ class PostController extends Controller
             'image' => 'required|mimes:jpeg,png,jpg,svg|max:8048'
         ]);
 
-        //change image name
-        $image_name = time() . now() . '-' . $request->title . '.' . $request->image->extension();
 
         $imagePath = $request->image->store('uploads', 'public');
 
@@ -79,11 +77,18 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'category' => 'required|max:20',
+            'image' => 'mimes:jpeg,png,jpg,svg|max:8048'
         ]);
+        if($request->image){
+            $imagePath = $request->image->store('uploads', 'public');
+        }else{
+            $imagePath = $post->image;
+        }
         //update the data
         $post->title = $request->title;
         $post->description = $request->description;
         $post->category = $request->category;
+        $post->image = $imagePath;
         $post->save();
         //redirect
         return redirect()->route('post.show', ['id' => $post->id]);
