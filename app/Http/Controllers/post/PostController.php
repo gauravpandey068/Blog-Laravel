@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\post;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class PostController extends Controller
     {
         return view('post.index');
     }
+
     public function store(Request $request)
     {
 
@@ -26,11 +28,11 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'category' => 'required|max:20',
-            'image'=> 'required|mimes:jpeg,png,jpg,svg|max:8048'
+            'image' => 'required|mimes:jpeg,png,jpg,svg|max:8048'
         ]);
 
         //change image name
-        $image_name = time().now() . '-' . $request->title . '.' . $request->image->extension();
+        $image_name = time() . now() . '-' . $request->title . '.' . $request->image->extension();
 
         $imagePath = $request->image->store('uploads', 'public');
 
@@ -44,27 +46,32 @@ class PostController extends Controller
         //redirect
         return redirect()->route('home');
     }
+
     public function show($id)
     {
         $post = Post::find($id);
-        return view('post.post', ['post' => $post]);
+        $comments = $post->comment()->orderBy('created_at', 'desc')->paginate(10);
+        return view('post.post', ['post' => $post, 'comments' => $comments]);
     }
+
     public function edit($id)
     {
         $post = Post::find($id);
         //authorize
-        if(!Gate::allows('authorizationPost', $post)){
+        if (!Gate::allows('authorizationPost', $post)) {
             abort(403, 'Unauthorized action');
         }
 
         return view('post.edit', ['post' => $post]);
     }
-    public function update(Request $request, $id){
+
+    public function update(Request $request, $id)
+    {
 
         //find the post
         $post = Post::find($id);
         //authorize
-        if(!Gate::allows('authorizationPost', $post)){
+        if (!Gate::allows('authorizationPost', $post)) {
             abort(403, 'Unauthorized action');
         }
         //validate the data
@@ -81,11 +88,13 @@ class PostController extends Controller
         //redirect
         return redirect()->route('post.show', ['id' => $post->id]);
     }
-    public function destroy($id){
+
+    public function destroy($id)
+    {
         //find the post
         $post = Post::find($id);
         //authorize
-        if(!Gate::allows('authorizationPost', $post)){
+        if (!Gate::allows('authorizationPost', $post)) {
             abort(403, 'Unauthorized action');
         }
         //delete the post

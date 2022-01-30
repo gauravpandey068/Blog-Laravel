@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\post\LikeController;
 use App\Http\Controllers\post\PostController;
@@ -32,3 +33,7 @@ Route::get('/home/post/{id}', [PostController::class, 'show'])->name('post.show'
 Route::post('/home/post/{post}/like', [LikeController::class, 'store'])->name('post.like');
 Route::post('/home/post/{post}/unlike', [LikeController::class, 'unlike'])->name('post.unlike');
 
+//Post Comments
+Route::post('/home/{post}/comment/', [CommentController::class, 'store'])->name('post.comment.store');
+Route::patch('/home/{post}/comment/{comment}', [CommentController::class, 'update'])->name('post.comment.update');
+Route::delete('/home/{post}/comment/{comment}', [CommentController::class, 'destroy'])->name('post.comment.destroy');

@@ -27,6 +27,6 @@ class Post extends Model
         return $this->likes->contains('user_id', $user->id); // check if user like post or not
     }
     public function commentBy(User $user){
-        return $this->comments->contains('user_id', $user->id); // check if user comment on post or not
+        return $this->comment->contains('user_id', $user->id); // check if user comment on post or not
     }
 }
