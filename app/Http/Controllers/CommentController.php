@@ -37,9 +37,8 @@ class CommentController extends Controller
         $this->validate($request, [
             'comment' => 'required|min:5|max:1000',
         ]);
-        $post->comment()->update([
-            'comments' => $request->comment,
-        ]);
+        $comment->comments = $request->comment;
+        $comment->save();
         return redirect()->back();
     }
 
