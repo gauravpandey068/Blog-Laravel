@@ -8,7 +8,7 @@
                 <p class="card-text"><small class="text-muted"><span>Author: {{$post->user->name}}  </span>
                         Last updated {{$post->updated_at->diffForHumans()}}</small></p>
                 <p class="card-text"><small class="text-muted">
-                        Category: {{$post->category}} </small></p>
+                        Tag: {{$post->category}} </small></p>
                 @if(Auth::check())
                     @if(Auth::user() == $post->user)
                         <div class="d-flex">

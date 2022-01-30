@@ -43,9 +43,9 @@
                                           rows="10" name="description">{{$post->description}}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Category</label>
+                                <label class="form-label">Tag</label>
                                 <input type="text" class="form-control"
-                                       placeholder="Category" name="category" value="{{$post->category}}">
+                                       placeholder="Tag" name="category" value="{{$post->category}}">
                             </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Post</button>
