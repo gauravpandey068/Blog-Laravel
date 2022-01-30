@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\post\LikeController;
 use App\Http\Controllers\post\PostController;
+use App\Http\Controllers\post\UserPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,6 @@ Route::post('/home/post/{post}/unlike', [LikeController::class, 'unlike'])->name
 Route::post('/home/{post}/comment/', [CommentController::class, 'store'])->name('post.comment.store');
 Route::patch('/home/{post}/comment/{comment}', [CommentController::class, 'update'])->name('post.comment.update');
 Route::delete('/home/{post}/comment/{comment}', [CommentController::class, 'destroy'])->name('post.comment.destroy');
+
+//User's Posts
+Route::get('/dashboard/user/posts', [UserPostController::class, 'index'])->name('user.posts');
