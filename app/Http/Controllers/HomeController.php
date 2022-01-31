@@ -25,4 +25,14 @@ class HomeController extends Controller
         return view('home', ['posts' => $posts]);
     }
 
+    public function search(Request $requets){
+        $search= $requets->search;
+        $posts = Post::query()
+            ->where('title', 'like', '%'.$search.'%')
+            ->orWhere('category', 'like', '%'.$search.'%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('home', ['posts' => $posts]);
+    }
+
 }

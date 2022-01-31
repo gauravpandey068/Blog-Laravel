@@ -20,6 +20,9 @@
                                 </a>
                             </div>
                         @endforeach
+                            <div class="mt-5 mb-5">
+                                {{$posts->links()}}
+                            </div>
                     @else
                         <div class="card-body m-5">
                             <p class="text-center text-primary fs-2">No Posts Found!</p>

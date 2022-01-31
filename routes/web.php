@@ -22,6 +22,9 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+//Search
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
 //Post
 Route::get('/dashboard/post', [PostController::class, 'index'])->name('post');
 Route::post('/dashboard/post', [PostController::class, 'store']);
